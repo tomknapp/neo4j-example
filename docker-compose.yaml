@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+
+#####################################################################
+#   ____  _____ ____  ____ ___ ____ _____ _____ _   _  ____ _____
+#  |  _ \| ____|  _ \/ ___|_ _/ ___|_   _| ____| \ | |/ ___| ____|
+#  | |_) |  _| | |_) \___ \| |\___ \ | | |  _| |  \| | |   |  _|
+#  |  __/| |___|  _ < ___) | | ___) || | | |___| |\  | |___| |___
+#  |_|   |_____|_| \_\____/___|____/ |_| |_____|_| \_|\____|_____|
+#####################################################################
+  neo4j:
+    image: neo4j:latest
+    restart: unless-stopped
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./persistence/data:/data
+      - ./persistence/logs:/logs
+      - ./data:/import
+    environment: 
+      # DB name
+      - NEO4J_initial_dbms_default__database=Log-Analyser
+      # Initial Password
+      - NEO4J_AUTH=neo4j/<YOUR SECURE PASSWORD>
+      # Raise memory limits
+      - NEO4J_server_memory_pagecache_size=1G
+      - NEO4J_db_tx__log_rotation_size=10MB
+      - NEO4J_server_memory_heap_initial__size=1G
+      - NEO4J_server_memory_heap_max__size=1G
+      - NEO4JLABS_PLUGINS=["graph-data-science"]
+    expose:
+      - 7474
+      - 7687

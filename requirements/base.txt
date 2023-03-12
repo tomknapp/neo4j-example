@@ -1,0 +1,5 @@
+# You will need to regenerate the 'base.lock' file following any changes made here by running the command
+# pip freeze --requirement requirements/base.txt > requirements/base.lock
+
+spacy===3.5.1
+spacytextblob===4.0.0
